@@ -4,21 +4,10 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const mongodb = require("mongodb");
+var methodOverride = require("method-override");
 
 const app = express();
 const port = process.env.PORT || 4500;
-
-// conneting cluster
-// const MongoClient = mongodb.MongoClient;
-// const url = `mongodb+srv://chankim:kingzone1234.@cluster0.q846kqz.mongodb.net/?retryWrites=true&w=majority`;
-
-// MongoClient.connect(url)
-//   .then(client => {
-//     console.log("mongo connected");
-//     console.log(client);
-//   })
-//   .catch(err => console.log(err));
 
 // Static File Service
 app.use(express.static("public"));
@@ -27,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set("views", __dirname + "/views");
 app.set("view engine", "pug");
+app.use(methodOverride("_method"));
 
 // Node의 native Promise 사용
 mongoose.Promise = global.Promise;

@@ -41,7 +41,7 @@ router.put("/todoid/:todoid", (req, res) => {
 router.delete("/delete", (req, res) => {
   console.log(req.body.todoid);
   Todo.deleteByTodoid(req.body.todoid)
-    .then(() => res.sendStatus(200))
+    .then(res.redirect("/"))
     .catch(err => res.status(500).send(err));
 });
 

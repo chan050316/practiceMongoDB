@@ -10,10 +10,12 @@ html(lang="en")
       form(action="/create", method="post") 
         input(type="text", name="todoid")
         input(type="text", name="content")
-        input(type="checkBox", name="completed")
         input(type="submit", value="")
-    -for(todo of todos)
+    -for(todo in todos)
+    -console.log(todo)
       li
         span #{todo.todoid} / 
-        span #{todo.content} / 
-        span #{todo.completed}
+        span #{todo.content} /
+        form(action="/delete?_method=DELETE", method="post") 
+          input(style="display:none", value=todo.todoid, name="todoid")
+          button delete

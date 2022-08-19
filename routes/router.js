@@ -5,8 +5,7 @@ const Todo = require("../models/todo");
 router.get("/", (req, res) => {
   Todo.findAll()
     .then(todos => {
-      // console.log(todos);
-      if (!todos.length) return res.render("home", { todos: `not found Todo` });
+      if (!todos.length) return res.render("home", { todos: "" });
       console.log(todos);
       res.render("home", { todos });
     })

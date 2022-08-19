@@ -11,11 +11,13 @@ html(lang="en")
         input(type="text", name="todoid")
         input(type="text", name="content")
         input(type="submit", value="")
-    -for(todo in todos)
-    -console.log(todo)
+    -for(todo of todos)
       li
         span #{todo.todoid} / 
-        span #{todo.content} /
+        span #{todo.content}
         form(action="/delete?_method=DELETE", method="post") 
           input(style="display:none", value=todo.todoid, name="todoid")
           button delete
+        form(action="/delete?_method=DELETE", method="post") 
+          input(style="display:none", value=todo.todoid, name="todoid")
+          button change

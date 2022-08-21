@@ -10,7 +10,7 @@ html(lang="en")
       form(action="/create", method="post") 
         input(type="text", name="todoid")
         input(type="text", name="content")
-        input(type="submit", value="")
+        button create
     -for(todo of todos)
       li
         span #{todo.todoid} / 
@@ -18,6 +18,6 @@ html(lang="en")
         form(action="/delete?_method=DELETE", method="post") 
           input(style="display:none", value=todo.todoid, name="todoid")
           button delete
-        form(action="/delete?_method=DELETE", method="post") 
-          input(style="display:none", value=todo.todoid, name="todoid")
+        form(action=`/todoid/${todo.todoid}?_method=PUT`, method="post") 
+          input(value=todo.content, name="payload")
           button change

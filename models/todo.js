@@ -34,6 +34,7 @@ todoSchema.statics.findOneByTodoid = function (todoid) {
 // Update by todoid
 todoSchema.statics.updateByTodoid = function (todoid, payload) {
   // { new: true }: return the modified document rather than the original. defaults to false
+  console.log(todoid, payload);
   return this.findOneAndUpdate({ todoid }, payload, { new: true });
 };
 
@@ -43,4 +44,6 @@ todoSchema.statics.deleteByTodoid = function (todoid) {
 };
 
 // Create Model & Export
-module.exports = mongoose.model("Todo", todoSchema);
+const Todo = mongoose.model("todo", todoSchema);
+
+module.exports = Todo;

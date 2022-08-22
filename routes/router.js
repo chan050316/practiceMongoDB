@@ -28,43 +28,47 @@ router.get("/", async (req, res) => {
 });
 
 // Find One by todoid
-router.get("/todoid/:todoid", (req, res) => {
-  Todo.findOneByTodoid(req.params.todoid)
-    .then(todo => {
-      if (!todo) {
-        res.status(404).send({ err: "Todo not found" });
-      }
-      return res.send(`findOne successfully: ${todo}`);
-    })
-    .catch(err => res.status(500).send(err));
-});
+// router.get("/todoid/:todoid", (req, res) => {
+//   Todo.findOneByTodoid(req.params.todoid)
+//     .then(todo => {
+//       if (!todo) {
+//         res.status(404).send({ err: "Todo not found" });
+//       }
+//       return res.send(`findOne successfully: ${todo}`);
+//     })
+//     .catch(err => res.status(500).send(err));
+// });
 
 // Create new todo document
 router.post("/create", async (req, res) => {
   const todo = new Todo(req.body);
   try {
-    console.log(todo);
     todo.save();
-    console.log("success");
-    res.redirect("/");
+    console.log("success create data");
+    res.redirect("back");
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
 // Update by todoid
-router.put("/todoid/:todoid", (req, res) => {
-  Todo.updateByTodoid(req.params.todoid, req.body)
-    .then(todo => res.send(todo))
-    // .then(res.redirect("/"))
-    .catch(err => res.status(500).send(err));
+router.put("/todoid/:todoid", async (req, res) => {
+  const todoid = req.params.todoid;
+  const payload = req.body;
+  const todo = Todo.findOne({ todoid });
+  try {
+    console.log(todo.todoid);
+    res.redirect("back");
+  } catch (err) {
+    err => res.status(500).send(err);
+  }
 });
 
 // Delete by todoid
 router.delete("/delete", (req, res) => {
   console.log(req.body.todoid);
   Todo.deleteByTodoid(req.body.todoid)
-    .then(res.redirect("/"))
+    .then(res.redirect("back"))
     .catch(err => res.status(500).send(err));
 });
 

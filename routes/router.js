@@ -55,9 +55,10 @@ router.post("/create", async (req, res) => {
 router.put("/todoid/:todoid", async (req, res) => {
   const todoid = req.params.todoid;
   const payload = req.body;
-  const todo = Todo.findOne({ todoid });
   try {
-    console.log(todo.todoid);
+    const todo = await Todo.findOne({ todoid });
+    todo.content = payload.content;
+    todo.save();
     res.redirect("back");
   } catch (err) {
     err => res.status(500).send(err);

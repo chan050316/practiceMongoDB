@@ -21,3 +21,5 @@ html(lang="en")
         form(action=`/todoid/${todo.todoid}?_method=PUT`, method="post") 
           input(value=todo.content, name="content")
           button change
+        form(action=`/todoid/${todo.todoid}`, method="get") 
+          button info

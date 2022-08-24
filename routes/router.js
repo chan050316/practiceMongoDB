@@ -15,29 +15,18 @@ router.get("/", async (req, res) => {
   todos = await Todo.find();
   console.log(todos);
   res.render("home", { todos });
-  // .then(todos => {
-  //   console.log(todos);
-  //   if (!todos.length) return res.render("home", { todos: "" });
-  //   todolist += todos;
-  //   return todolist;
-  // })
-  // .then(todolist => {
-  //   console.log(typeof todolist);
-  //   res.render("home", { todos: todolist });
-  // })
 });
 
 // Find One by todoid
-// router.get("/todoid/:todoid", (req, res) => {
-//   Todo.findOneByTodoid(req.params.todoid)
-//     .then(todo => {
-//       if (!todo) {
-//         res.status(404).send({ err: "Todo not found" });
-//       }
-//       return res.send(`findOne successfully: ${todo}`);
-//     })
-//     .catch(err => res.status(500).send(err));
-// });
+router.get("/todoid/:todoid", async (req, res) => {
+  const todoid = req.params.todoid;
+  try {
+    const todo = await Todo.findOne({ todoid });
+    res.render("info", { todo });
+  } catch (e) {
+    res.send(e);
+  }
+});
 
 // Create new todo document
 router.post("/create", async (req, res) => {

@@ -1,13 +1,5 @@
 const router = require("express").Router();
 const Todo = require("../models/todo");
-var util = require("util");
-var EventEmitter = require("events").EventEmitter;
-
-//EventEmitter 상속
-var MyObj = function () {};
-util.inherits(MyObj, EventEmitter);
-var myObj = new MyObj();
-myObj.setMaxListeners(20);
 
 // Find All
 router.get("/", async (req, res) => {
